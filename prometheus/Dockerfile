@@ -8,8 +8,6 @@ RUN apt-get update \
   && cp prometheus-1.6.1.linux-armv7/prometheus /usr/local/bin/ \
   && chmod 755 /usr/local/bin/prometheus
 
-COPY prometheus.yml /etc/prometheus.yml
-
 ENTRYPOINT ["/usr/local/bin/prometheus", "-config.file=/etc/prometheus.yml"]
 
 EXPOSE 9090

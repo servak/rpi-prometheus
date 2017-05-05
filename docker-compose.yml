@@ -5,15 +5,17 @@ services:
       context: prometheus
     container_name: prometheus
     privileged: true
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus.yml
     ports:
       - "9090:9090"
-    links:
-      - node_exporter:container-node_exporter
+    network_mode: "host"
 
   node_exporter:
     build:
       context: node_exporter
     container_name: node_exporter
+    privileged: true
     ports:
       - "9100:9100"
     volumes:
@@ -21,4 +23,5 @@ services:
       - '/sys:/host/sys'
       - '/:/rootfs'
       - '/etc/hostname:/etc/host_hostname'
+    network_mode: "host"
     command: -collector.procfs /host/proc -collector.sysfs /host/sys -collector.filesystem.ignored-mount-points "^/(sys|proc|dev|host|etc)($$|/)"

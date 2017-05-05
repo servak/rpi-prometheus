@@ -32,4 +32,4 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['container-node_exporter:9100']
+      - targets: ['localhost:9100']
